@@ -26,6 +26,11 @@ function applyLang(newLang) {
   document.querySelectorAll("#galleryGrid .g-caption").forEach((el, i) => {
     if (GALLERY_PHOTOS[i]) el.textContent = GALLERY_PHOTOS[i].caps[newLang] || GALLERY_PHOTOS[i].caps.sq;
   });
+  const heroCap = document.querySelector(".hero-slide-caption");
+  if (heroCap && typeof HERO_SLIDES !== "undefined") {
+    const caps = HERO_SLIDES[heroIndex].caps;
+    heroCap.textContent = caps[newLang] || caps.sq;
+  }
 }
 
 document.querySelectorAll("#langSwitch button").forEach((btn) => {
@@ -48,27 +53,23 @@ const GALLERY_VIDEOS = [
 ];
 
 const GALLERY_PHOTOS = [
-  { src: "img/gallery/glass-wall-de-1.png", cat: "de",  badge: "🇩🇪", featured: true, caps: { sq: "Mure xhami panoramike — Gjermani", de: "Panorama-Glaswand — Deutschland", en: "Panoramic glass wall — Germany" } },
+  { src: "img/gallery/glass-wall-de-1.png", cat: "de",  badge: "🇩🇪", caps: { sq: "Mure xhami panoramike — Gjermani", de: "Panorama-Glaswand — Deutschland", en: "Panoramic glass wall — Germany" } },
   { src: "img/gallery/house-xk-facade.png", cat: "xk",  badge: "🇽🇰", caps: { sq: "Shtëpi individuale — Kosovë", de: "Einfamilienhaus — Kosovo", en: "Residential house — Kosovo" } },
   { src: "img/gallery/glass-wall-de-2.png", cat: "de",  badge: "🇩🇪", caps: { sq: "Sisteme xhami — Gjermani", de: "Glassystem — Deutschland", en: "Glass system — Germany" } },
   { src: "img/gallery/door-anthracite.png", cat: "xk",  badge: null,   caps: { sq: "Derë hyrëse antracit", de: "Haustür Anthrazit", en: "Anthracite entry door" } },
   { src: "img/gallery/commercial-xk.png",  cat: "xk",  badge: "🇽🇰", caps: { sq: "Objekt komercial — Kosovë", de: "Gewerbeobjekt — Kosovo", en: "Commercial building — Kosovo" } },
   { src: "img/gallery/gable-window-de.png",cat: "de",  badge: "🇩🇪", caps: { sq: "Dritare me porosi — Gjermani", de: "Sonderfenster — Deutschland", en: "Custom window — Germany" } },
-  { src: "img/gallery/export-canada.png",  cat: "exp", badge: "🇨🇦", caps: { sq: "Eksport drejt Kanadasë", de: "Export nach Kanada", en: "Export to Canada" } },
+  { src: "img/gallery/house-de-after.png", cat: "de",  badge: "🇩🇪", caps: { sq: "Dritare & dyer të reja — Gjermani", de: "Neue Fenster & Türen — Deutschland", en: "New windows & doors — Germany" } },
   { src: "img/gallery/house-xk-detail.png",cat: "xk",  badge: "🇽🇰", caps: { sq: "Dritare & roleta — Kosovë", de: "Fenster & Rollläden — Kosovo", en: "Windows & shutters — Kosovo" } },
+  { src: "img/gallery/export-canada.png",  cat: "exp", badge: "🇨🇦", caps: { sq: "Eksport drejt Kanadasë", de: "Export nach Kanada", en: "Export to Canada" } },
+  { src: "img/gallery/house-de-before.png",cat: "de",  badge: "🇩🇪", caps: { sq: "Projekt renovimi — Gjermani", de: "Sanierungsprojekt — Deutschland", en: "Renovation project — Germany" } },
+  { src: "img/gallery/house-de-mid.png",   cat: "de",  badge: "🇩🇪", caps: { sq: "Montimi në proces — Gjermani", de: "Montage im Gange — Deutschland", en: "Installation in progress — Germany" } },
   { src: "img/gallery/export-loading.png", cat: "exp", badge: null,   caps: { sq: "Ngarkesë për eksport", de: "Export-Verladung", en: "Loading for export" } },
-];
-
-const FEATURE_STAGES = [
-  { src: "img/gallery/house-de-before.png", caps: { sq: "Para — Gjermani", de: "Vorher — Deutschland", en: "Before — Germany" } },
-  { src: "img/gallery/house-de-mid.png",    caps: { sq: "Gjatë punimeve", de: "Während der Montage", en: "During installation" } },
-  { src: "img/gallery/house-de-after.png",  caps: { sq: "Pas — Gjermani", de: "Nachher — Deutschland", en: "After — Germany" } },
 ];
 
 const LB_ITEMS = [
   ...GALLERY_VIDEOS.map((v) => ({ type: "video", src: v.src })),
   ...GALLERY_PHOTOS.map((p) => ({ type: "img", src: p.src, caps: p.caps })),
-  ...FEATURE_STAGES.map((s) => ({ type: "img", src: s.src, caps: s.caps })),
 ];
 let lbIndex = 0;
 
@@ -103,13 +104,6 @@ GALLERY_PHOTOS.forEach((p, i) => {
   galleryGrid.appendChild(item);
 });
 
-// Featured-project stages open in lightbox too
-document.querySelectorAll("#gFeature .g-feature-stages figure").forEach((fig, i) => {
-  fig.addEventListener("click", () =>
-    openLightbox(GALLERY_VIDEOS.length + GALLERY_PHOTOS.length + i)
-  );
-});
-
 // Filters
 document.querySelectorAll("#galleryFilters button").forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -120,9 +114,55 @@ document.querySelectorAll("#galleryFilters button").forEach((btn) => {
     document.querySelectorAll("#galleryGrid .g-item").forEach((el) => {
       el.classList.toggle("hidden", f !== "all" && el.dataset.cat !== f);
     });
-    document.getElementById("gFeature").classList.toggle("hidden", f !== "all" && f !== "de");
   });
 });
+
+// ----- Hero slider -----
+const HERO_SLIDES = [
+  { src: "img/gallery/glass-wall-de-1.png", caps: { sq: "🇩🇪 Mure xhami — Gjermani", de: "🇩🇪 Glaswand — Deutschland", en: "🇩🇪 Glass wall — Germany" } },
+  { src: "img/gallery/house-xk-facade.png", caps: { sq: "🇽🇰 Shtëpi — Kosovë", de: "🇽🇰 Haus — Kosovo", en: "🇽🇰 House — Kosovo" } },
+  { src: "img/gallery/door-anthracite.png", caps: { sq: "Derë hyrëse antracit", de: "Haustür Anthrazit", en: "Anthracite entry door" } },
+  { src: "img/gallery/glass-wall-de-2.png", caps: { sq: "🇩🇪 Sisteme xhami — Gjermani", de: "🇩🇪 Glassystem — Deutschland", en: "🇩🇪 Glass system — Germany" } },
+  { src: "img/gallery/house-de-after.png",  caps: { sq: "🇩🇪 Dritare të reja — Gjermani", de: "🇩🇪 Neue Fenster — Deutschland", en: "🇩🇪 New windows — Germany" } },
+];
+let heroIndex = 0;
+let heroTimer = null;
+
+const heroSlider = document.getElementById("heroSlider");
+const heroDots = document.getElementById("heroDots");
+const heroCaption = document.createElement("div");
+heroCaption.className = "hero-slide-caption show";
+heroSlider.appendChild(heroCaption);
+
+HERO_SLIDES.forEach((s, i) => {
+  const img = document.createElement("img");
+  img.src = s.src;
+  img.alt = s.caps.en;
+  if (i === 0) img.classList.add("active");
+  heroSlider.insertBefore(img, heroDots);
+
+  const dot = document.createElement("button");
+  dot.setAttribute("aria-label", `Slide ${i + 1}`);
+  if (i === 0) dot.classList.add("active");
+  dot.addEventListener("click", () => { heroGoTo(i); heroRestart(); });
+  heroDots.appendChild(dot);
+});
+
+function heroGoTo(i) {
+  heroIndex = i;
+  heroSlider.querySelectorAll("img").forEach((img, j) => img.classList.toggle("active", j === i));
+  heroDots.querySelectorAll("button").forEach((b, j) => b.classList.toggle("active", j === i));
+  const caps = HERO_SLIDES[i].caps;
+  heroCaption.textContent = caps[lang] || caps.sq;
+}
+
+function heroRestart() {
+  clearInterval(heroTimer);
+  heroTimer = setInterval(() => heroGoTo((heroIndex + 1) % HERO_SLIDES.length), 4000);
+}
+
+heroGoTo(0);
+heroRestart();
 
 // Lightbox
 function openLightbox(index) {

@@ -90,11 +90,29 @@ a { color: inherit; text-decoration: none; }
   position: relative;
 }
 .hero-img-frame img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; }
-.hero-img-frame .ph-icon {
-  position: absolute; inset: 0; display: none;
-  align-items: center; justify-content: center; color: rgba(255,255,255,.4);
+
+/* Hero slider */
+.hero-slider img {
+  position: absolute; inset: 0; opacity: 0; transition: opacity .9s ease; z-index: 1;
 }
-.hero-img-frame.placeholder .ph-icon { display: flex; }
+.hero-slider img.active { opacity: 1; z-index: 2; }
+.hero-slide-caption {
+  position: absolute; bottom: 16px; left: 16px; z-index: 5;
+  background: rgba(0,0,0,.55); color: #fff;
+  font-size: 12.5px; font-weight: 700; padding: 5px 14px; border-radius: 999px;
+  backdrop-filter: blur(4px); pointer-events: none;
+  opacity: 0; transition: opacity .5s;
+}
+.hero-slide-caption.show { opacity: 1; }
+.hero-dots {
+  position: absolute; bottom: 16px; right: 16px; z-index: 5;
+  display: flex; gap: 7px;
+}
+.hero-dots button {
+  width: 9px; height: 9px; border-radius: 50%; border: 0; padding: 0;
+  background: rgba(255,255,255,.45); cursor: pointer; transition: .2s;
+}
+.hero-dots button.active { background: var(--green); transform: scale(1.25); }
 
 /* ===== Trustbar ===== */
 .trustbar { background: var(--anthracite); color: #cfd1d4; padding: 16px 0; }
@@ -170,38 +188,12 @@ a { color: inherit; text-decoration: none; }
 .gallery-filters button:hover { border-color: var(--green); color: var(--green-dark); }
 .gallery-filters button.active { background: var(--anthracite); border-color: var(--anthracite); color: #fff; }
 
-/* ===== Gallery — Featured project ===== */
-.g-feature {
-  display: grid; grid-template-columns: .85fr 1.15fr; gap: 0;
-  background: var(--anthracite); border-radius: 16px; overflow: hidden;
-  margin-bottom: 14px;
-}
-.g-feature.hidden { display: none; }
-.g-feature-text { padding: 36px 34px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 14px; }
-.g-feature-tag {
-  display: inline-flex; gap: 6px; align-items: center;
-  background: rgba(140,198,63,.16); color: var(--green);
-  font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 999px;
-}
-.g-feature-text h3 { color: #fff; font-size: 24px; font-weight: 800; letter-spacing: -.5px; line-height: 1.2; }
-.g-feature-text p { color: #b9bbbf; font-size: 14.5px; }
-.g-feature-stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; }
-.g-feature-stages figure { position: relative; margin: 0; overflow: hidden; cursor: pointer; border-radius: 10px; }
-.g-feature-stages img { width: 100%; height: 100%; min-height: 240px; object-fit: cover; transition: transform .3s; display: block; }
-.g-feature-stages figure:hover img { transform: scale(1.06); }
-.g-feature-stages figcaption {
-  position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
-  background: rgba(0,0,0,.62); color: #fff; font-size: 11.5px; font-weight: 700;
-  padding: 4px 12px; border-radius: 999px; white-space: nowrap; backdrop-filter: blur(4px);
-}
-
 /* ===== Gallery — Photos ===== */
-.gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; grid-auto-flow: dense; }
+.gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .g-item {
   aspect-ratio: 1; border-radius: 12px; overflow: hidden; position: relative;
   background: linear-gradient(145deg, #eceeed, #dfe2e0); cursor: pointer;
 }
-.g-item.featured { grid-column: span 2; grid-row: span 2; }
 .g-item.hidden { display: none; }
 .g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; position: relative; z-index: 2; }
 .g-item:hover img { transform: scale(1.07); }
@@ -354,8 +346,6 @@ a.ci-value:hover { color: var(--green); }
   .hero-img-frame { aspect-ratio: 16/9; }
   .gallery-videos { grid-template-columns: repeat(3, 1fr); }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .g-feature { grid-template-columns: 1fr; }
-  .g-feature-stages img { min-height: 170px; }
   .steps-grid { grid-template-columns: repeat(2, 1fr); }
   .gallery-cta { justify-content: center; text-align: center; }
   .nav-links {
@@ -372,7 +362,5 @@ a.ci-value:hover { color: var(--green); }
   .hero { padding: 40px 0; }
   .gallery-videos { grid-template-columns: 1fr; }
   .lb-nav { display: none; }
-  .g-feature-stages { grid-template-columns: 1fr; }
-  .g-feature-stages img { min-height: 200px; }
   .steps-grid { grid-template-columns: 1fr; }
 }
