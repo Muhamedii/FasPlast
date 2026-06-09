@@ -1,9 +1,11 @@
 name: Deploy to GitHub Pages
 
+# Pages deployments are only accepted from the repository default branch
+# (claude/fasplast-github-pages-6feg03). A trigger on main always fails
+# and its run cancels the good one via the concurrency group.
 on:
   push:
     branches:
-      - main
       - claude/fasplast-github-pages-6feg03
   workflow_dispatch:
 
