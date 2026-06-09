@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100">
+  <!-- Fas Plast mark: grey house roof + green checkmark -->
+  <g fill="none" stroke="#6d6e71" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <!-- roof -->
+    <path d="M14 56 L52 22 L90 56" />
+    <!-- chimney -->
+    <path d="M70 30 L70 18 L80 18 L80 39" />
+    <!-- right wall hint -->
+    <path d="M84 51 L84 74" />
+  </g>
+  <!-- round window -->
+  <g stroke="#9b9da0" stroke-width="3.5" fill="#ffffff">
+    <circle cx="46" cy="50" r="11" />
+    <path d="M46 39 V61 M35 50 H57" />
+  </g>
+  <!-- green check -->
+  <path d="M8 52 L36 86 L104 16" fill="none" stroke="#8CC63F" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
