@@ -154,28 +154,6 @@ a { color: inherit; text-decoration: none; }
 .why-item h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
 .why-item p { font-size: 14.5px; color: #b9bbbf; }
 
-/* ===== Gallery — Videos ===== */
-.gallery-videos {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 14px;
-}
-.g-video {
-  border-radius: 12px; overflow: hidden; position: relative;
-  aspect-ratio: 9 / 16; background: var(--anthracite); cursor: pointer;
-  max-height: 420px;
-}
-.g-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
-.g-video .play-btn {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  background: rgba(0,0,0,.22); transition: background .2s;
-}
-.g-video:hover .play-btn { background: rgba(0,0,0,.06); }
-.g-video-label {
-  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
-  background: rgba(0,0,0,.55); color: #fff; font-size: 12px; font-weight: 700;
-  padding: 4px 12px; border-radius: 999px; white-space: nowrap;
-  backdrop-filter: blur(4px); pointer-events: none;
-}
-
 /* ===== Gallery — Filters ===== */
 .gallery-filters {
   display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px;
@@ -197,6 +175,17 @@ a { color: inherit; text-decoration: none; }
 .g-item.hidden { display: none; }
 .g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; position: relative; z-index: 2; }
 .g-item:hover img { transform: scale(1.07); }
+.g-item video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  position: relative; z-index: 2; transition: transform .3s;
+}
+.g-item:hover video { transform: scale(1.07); }
+.g-play {
+  position: absolute; inset: 0; z-index: 3; display: flex;
+  align-items: center; justify-content: center;
+  background: rgba(0,0,0,.18); transition: background .2s; pointer-events: none;
+}
+.g-item:hover .g-play { background: rgba(0,0,0,.04); }
 .g-badge {
   position: absolute; top: 10px; left: 10px; z-index: 3;
   background: rgba(0,0,0,.58); color: #fff;
@@ -257,6 +246,31 @@ a { color: inherit; text-decoration: none; }
 
 .gallery-note { text-align: center; margin: 34px 0 16px; color: var(--grey); font-weight: 500; }
 .gallery-social { display: flex; gap: 12px; justify-content: center; }
+
+/* ===== FAQ ===== */
+.faq-list { max-width: 780px; margin: 34px auto 0; display: flex; flex-direction: column; gap: 12px; }
+.faq-list details {
+  background: #fff; border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px 22px; transition: .2s;
+}
+.faq-list details[open] { border-color: rgba(140,198,63,.5); box-shadow: var(--shadow); }
+.faq-list summary {
+  cursor: pointer; font-weight: 700; font-size: 15.5px; color: var(--anthracite);
+  list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 14px;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+  content: "+"; font-size: 22px; font-weight: 800; color: var(--green);
+  line-height: 1; transition: transform .2s; flex-shrink: 0;
+}
+.faq-list details[open] summary::after { transform: rotate(45deg); }
+.faq-list details p { margin-top: 12px; color: var(--grey); font-size: 14.5px; }
+
+/* ===== Scroll reveal ===== */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+}
 
 /* ===== Process steps ===== */
 .steps-grid {
@@ -344,7 +358,6 @@ a.ci-value:hover { color: var(--green); }
   .hero-inner, .about-inner, .contact-grid { grid-template-columns: 1fr; }
   .hero-visual { order: -1; }
   .hero-img-frame { aspect-ratio: 16/9; }
-  .gallery-videos { grid-template-columns: repeat(3, 1fr); }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .steps-grid { grid-template-columns: repeat(2, 1fr); }
   .gallery-cta { justify-content: center; text-align: center; }
@@ -360,7 +373,6 @@ a.ci-value:hover { color: var(--green); }
   .form-row { grid-template-columns: 1fr; }
   .section { padding: 60px 0; }
   .hero { padding: 40px 0; }
-  .gallery-videos { grid-template-columns: 1fr; }
   .lb-nav { display: none; }
   .steps-grid { grid-template-columns: 1fr; }
 }

@@ -13,6 +13,29 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Fas Plast",
+    "description": "Dyer dhe dritare PVC, roleta dhe mure xhami — prodhim, transport dhe montim profesional. Kosovë, Gjermani, Austri.",
+    "telephone": "+38344885649",
+    "email": "fasplast@hotmail.com",
+    "url": "https://muhamedii.github.io/FasPlast/",
+    "image": "https://muhamedii.github.io/FasPlast/img/logo.svg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Prelez i Muhaxherve",
+      "postalCode": "70000",
+      "addressCountry": "XK"
+    },
+    "areaServed": ["Kosovo", "Germany", "Austria"],
+    "sameAs": [
+      "https://www.instagram.com/fasplast05",
+      "https://www.facebook.com/share/1D2Sa25rgZ/"
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -163,9 +186,8 @@
         <button data-filter="de" data-i18n="gallery.filter.de">🇩🇪 Gjermani &amp; Austri</button>
         <button data-filter="xk" data-i18n="gallery.filter.xk">🇽🇰 Kosovë</button>
         <button data-filter="exp" data-i18n="gallery.filter.exp">🚚 Eksport</button>
+        <button data-filter="video" data-i18n="gallery.filter.video">🎥 Video</button>
       </div>
-
-      <div class="gallery-videos" id="galleryVideos"></div>
 
       <div class="gallery-grid" id="galleryGrid"></div>
 
@@ -246,6 +268,36 @@
     </div>
   </section>
 
+  <!-- ===== FAQ ===== -->
+  <section class="section section-grey" id="faq">
+    <div class="container">
+      <h2 class="section-title" data-i18n="faq.title">Pyetje të Shpeshta</h2>
+      <p class="section-sub" data-i18n="faq.sub">Përgjigjet e pyetjeve që na bëhen më së shpeshti.</p>
+      <div class="faq-list">
+        <details>
+          <summary data-i18n="faq.q1">Sa zgjat prodhimi dhe montimi?</summary>
+          <p data-i18n="faq.a1">Afati varet nga madhësia e projektit dhe konfirmohet saktë në ofertë. Ne e respektojmë gjithmonë afatin e premtuar.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q2">A montoni edhe në Gjermani dhe Austri?</summary>
+          <p data-i18n="faq.a2">Po — punojmë rregullisht në Gjermani dhe Austri. Ne organizojmë transportin dhe montimin e plotë; ju nuk keni nevojë të kujdeseni për asgjë.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q3">A janë matjet dhe oferta vërtet falas?</summary>
+          <p data-i18n="faq.a3">Po, plotësisht falas dhe pa asnjë obligim. Vijmë në terren, marrim masat dhe ju dërgojmë ofertë të detajuar.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q4">Çfarë garancie ofroni?</summary>
+          <p data-i18n="faq.a4">Ofrojmë garanci me shkrim si për produktin ashtu edhe për montimin.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q5">Çfarë ngjyrash dhe opsionesh keni?</summary>
+          <p data-i18n="faq.a5">Antracit, e bardhë, imitim druri dhe ngjyra të tjera sipas kërkesës — me xham dyfish ose trefish, roleta dhe aksesorë sipas dëshirës.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== CONTACT ===== -->
   <section class="section" id="kontakti">
     <div class="container">
@@ -263,15 +315,36 @@
               <input type="tel" id="qPhone" required placeholder="044 ..." />
             </div>
           </div>
-          <div class="form-field">
-            <label for="qProduct" data-i18n="form.product">Produkti</label>
-            <select id="qProduct">
-              <option value="Dritare PVC" data-i18n="form.opt1">Dritare PVC</option>
-              <option value="Dyer Hyrëse" data-i18n="form.opt2">Dyer Hyrëse</option>
-              <option value="Roleta" data-i18n="form.opt3">Roleta</option>
-              <option value="Mure Xhami" data-i18n="form.opt4">Mure Xhami / Dyer Rrëshqitëse</option>
-              <option value="Tjetër" data-i18n="form.opt5">Tjetër</option>
-            </select>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="qProduct" data-i18n="form.product">Produkti</label>
+              <select id="qProduct">
+                <option value="Dritare PVC" data-i18n="form.opt1">Dritare PVC</option>
+                <option value="Dyer Hyrëse" data-i18n="form.opt2">Dyer Hyrëse</option>
+                <option value="Roleta" data-i18n="form.opt3">Roleta</option>
+                <option value="Mure Xhami" data-i18n="form.opt4">Mure Xhami / Dyer Rrëshqitëse</option>
+                <option value="Tjetër" data-i18n="form.opt5">Tjetër</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="qQty" data-i18n="form.qty">Sasia (copë)</label>
+              <input type="number" id="qQty" min="1" placeholder="p.sh. 5" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="qColor" data-i18n="form.color">Ngjyra</label>
+              <select id="qColor">
+                <option value="E bardhë" data-i18n="form.colorOpt1">E bardhë</option>
+                <option value="Antracit" data-i18n="form.colorOpt2">Antracit</option>
+                <option value="Imitim druri" data-i18n="form.colorOpt3">Imitim druri</option>
+                <option value="Tjetër" data-i18n="form.colorOpt4">Tjetër / Pa vendosur</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="qCity" data-i18n="form.city">Qyteti / Lokacioni</label>
+              <input type="text" id="qCity" data-i18n-ph="form.cityPh" placeholder="p.sh. Ferizaj ose München" />
+            </div>
           </div>
           <div class="form-field">
             <label for="qMsg" data-i18n="form.msg">Mesazhi (masat, lokacioni, detaje...)</label>

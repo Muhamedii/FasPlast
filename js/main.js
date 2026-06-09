@@ -73,24 +73,23 @@ const LB_ITEMS = [
 ];
 let lbIndex = 0;
 
-// Render video strip
-const galleryVideos = document.getElementById("galleryVideos");
+// Render gallery grid: video tiles first, then photos
+const galleryGrid = document.getElementById("galleryGrid");
+
 GALLERY_VIDEOS.forEach((v, i) => {
   const item = document.createElement("div");
-  item.className = "g-video";
+  item.className = "g-item";
+  item.dataset.cat = "video";
   item.innerHTML = `
+    <span class="g-badge">🎥 Video</span>
     <video src="${v.src}" muted autoplay loop playsinline preload="metadata"></video>
-    <div class="play-btn">
-      <svg viewBox="0 0 24 24" width="56" height="56"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)"/><path d="M10 8l6 4-6 4V8z" fill="#fff"/></svg>
+    <div class="g-play">
+      <svg viewBox="0 0 24 24" width="48" height="48"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)"/><path d="M10 8l6 4-6 4V8z" fill="#fff"/></svg>
     </div>
-    <span class="g-video-label">${v.label[lang] || v.label.sq}</span>
   `;
   item.addEventListener("click", () => openLightbox(i));
-  galleryVideos.appendChild(item);
+  galleryGrid.appendChild(item);
 });
-
-// Render photo grid
-const galleryGrid = document.getElementById("galleryGrid");
 GALLERY_PHOTOS.forEach((p, i) => {
   const item = document.createElement("div");
   item.className = "g-item" + (p.featured ? " featured" : "");
@@ -221,12 +220,18 @@ function buildMessage() {
   const name = document.getElementById("qName").value.trim();
   const phone = document.getElementById("qPhone").value.trim();
   const product = document.getElementById("qProduct").value;
+  const qty = document.getElementById("qQty").value.trim();
+  const color = document.getElementById("qColor").value;
+  const city = document.getElementById("qCity").value.trim();
   const msg = document.getElementById("qMsg").value.trim();
   return (
     `${t("form.waIntro")}\n` +
     `${t("form.waName")}: ${name}\n` +
     `${t("form.waPhone")}: ${phone}\n` +
     `${t("form.waProduct")}: ${product}` +
+    (qty ? `\n${t("form.waQty")}: ${qty}` : "") +
+    `\n${t("form.waColor")}: ${color}` +
+    (city ? `\n${t("form.waCity")}: ${city}` : "") +
     (msg ? `\n${t("form.waMsg")}: ${msg}` : "")
   );
 }
@@ -244,6 +249,29 @@ document.getElementById("sendEmail").addEventListener("click", () => {
   const body = encodeURIComponent(buildMessage());
   window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
 });
+
+// ----- Scroll reveal -----
+const revealTargets = document.querySelectorAll(
+  ".card, .why-item, .step, .g-item, .gallery-cta, .about-card, .faq-list details, .section-title, .section-sub"
+);
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+  revealTargets.forEach((el, i) => {
+    el.classList.add("reveal");
+    el.style.transitionDelay = `${(i % 4) * 70}ms`;
+    io.observe(el);
+  });
+}
 
 // ----- Footer year -----
 document.getElementById("year").textContent = new Date().getFullYear();
