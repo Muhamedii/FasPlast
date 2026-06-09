@@ -23,7 +23,7 @@ function applyLang(newLang) {
   document.querySelectorAll("#langSwitch button").forEach((b) => {
     b.classList.toggle("active", b.dataset.lang === lang);
   });
-  document.querySelectorAll(".g-overlay span").forEach((el, i) => {
+  document.querySelectorAll("#galleryGrid .g-caption").forEach((el, i) => {
     if (GALLERY_PHOTOS[i]) el.textContent = GALLERY_PHOTOS[i].caps[newLang] || GALLERY_PHOTOS[i].caps.sq;
   });
 }
@@ -48,23 +48,27 @@ const GALLERY_VIDEOS = [
 ];
 
 const GALLERY_PHOTOS = [
-  { src: "img/gallery/glass-wall-de-1.png", badge: "🇩🇪 Gjermani", caps: { sq: "Mure xhami — Gjermani", de: "Glaswand — Deutschland", en: "Glass wall — Germany" } },
-  { src: "img/gallery/house-xk-facade.png", badge: "🇽🇰 Kosovë",   caps: { sq: "Shtëpi individuale — Kosovë", de: "Einfamilienhaus — Kosovo", en: "Residential house — Kosovo" } },
-  { src: "img/gallery/glass-wall-de-2.png", badge: "🇩🇪 Gjermani", caps: { sq: "Sisteme xhami — Gjermani", de: "Glassystem — Deutschland", en: "Glass system — Germany" } },
-  { src: "img/gallery/door-anthracite.png", badge: null,            caps: { sq: "Derë hyrëse antracit", de: "Haustür Anthrazit", en: "Anthracite entry door" } },
-  { src: "img/gallery/commercial-xk.png",  badge: "🇽🇰 Kosovë",   caps: { sq: "Objekt komercial — Kosovë", de: "Gewerbe — Kosovo", en: "Commercial building — Kosovo" } },
-  { src: "img/gallery/house-xk-detail.png",badge: "🇽🇰 Kosovë",   caps: { sq: "Dritare & roleta — Kosovë", de: "Fenster & Rollläden — Kosovo", en: "Windows & shutters — Kosovo" } },
-  { src: "img/gallery/export-canada.png",  badge: "🇨🇦 Kanada",    caps: { sq: "Eksport drejt Kanadasë", de: "Export nach Kanada", en: "Export to Canada" } },
-  { src: "img/gallery/house-de-after.png", badge: "🇩🇪 Gjermani", caps: { sq: "Pas: dritare të reja — Gjermani", de: "Nachher: neue Fenster", en: "After: new windows — Germany" } },
-  { src: "img/gallery/gable-window-de.png",badge: "🇩🇪 Gjermani", caps: { sq: "Dritare me porosi — Gjermani", de: "Sonderfenster — Deutschland", en: "Custom window — Germany" } },
-  { src: "img/gallery/export-loading.png", badge: null,            caps: { sq: "Ngarkesë për eksport", de: "Export-Verladung", en: "Loading for export" } },
-  { src: "img/gallery/house-de-before.png",badge: "🇩🇪 Gjermani", caps: { sq: "Para: zëvendësim dritaresh", de: "Vorher: Fenstererneuerung", en: "Before: window replacement" } },
-  { src: "img/gallery/house-de-mid.png",   badge: "🇩🇪 Gjermani", caps: { sq: "Gjatë montimit", de: "Montage läuft", en: "Installation in progress" } },
+  { src: "img/gallery/glass-wall-de-1.png", cat: "de",  badge: "🇩🇪", featured: true, caps: { sq: "Mure xhami panoramike — Gjermani", de: "Panorama-Glaswand — Deutschland", en: "Panoramic glass wall — Germany" } },
+  { src: "img/gallery/house-xk-facade.png", cat: "xk",  badge: "🇽🇰", caps: { sq: "Shtëpi individuale — Kosovë", de: "Einfamilienhaus — Kosovo", en: "Residential house — Kosovo" } },
+  { src: "img/gallery/glass-wall-de-2.png", cat: "de",  badge: "🇩🇪", caps: { sq: "Sisteme xhami — Gjermani", de: "Glassystem — Deutschland", en: "Glass system — Germany" } },
+  { src: "img/gallery/door-anthracite.png", cat: "xk",  badge: null,   caps: { sq: "Derë hyrëse antracit", de: "Haustür Anthrazit", en: "Anthracite entry door" } },
+  { src: "img/gallery/commercial-xk.png",  cat: "xk",  badge: "🇽🇰", caps: { sq: "Objekt komercial — Kosovë", de: "Gewerbeobjekt — Kosovo", en: "Commercial building — Kosovo" } },
+  { src: "img/gallery/gable-window-de.png",cat: "de",  badge: "🇩🇪", caps: { sq: "Dritare me porosi — Gjermani", de: "Sonderfenster — Deutschland", en: "Custom window — Germany" } },
+  { src: "img/gallery/export-canada.png",  cat: "exp", badge: "🇨🇦", caps: { sq: "Eksport drejt Kanadasë", de: "Export nach Kanada", en: "Export to Canada" } },
+  { src: "img/gallery/house-xk-detail.png",cat: "xk",  badge: "🇽🇰", caps: { sq: "Dritare & roleta — Kosovë", de: "Fenster & Rollläden — Kosovo", en: "Windows & shutters — Kosovo" } },
+  { src: "img/gallery/export-loading.png", cat: "exp", badge: null,   caps: { sq: "Ngarkesë për eksport", de: "Export-Verladung", en: "Loading for export" } },
+];
+
+const FEATURE_STAGES = [
+  { src: "img/gallery/house-de-before.png", caps: { sq: "Para — Gjermani", de: "Vorher — Deutschland", en: "Before — Germany" } },
+  { src: "img/gallery/house-de-mid.png",    caps: { sq: "Gjatë punimeve", de: "Während der Montage", en: "During installation" } },
+  { src: "img/gallery/house-de-after.png",  caps: { sq: "Pas — Gjermani", de: "Nachher — Deutschland", en: "After — Germany" } },
 ];
 
 const LB_ITEMS = [
   ...GALLERY_VIDEOS.map((v) => ({ type: "video", src: v.src })),
   ...GALLERY_PHOTOS.map((p) => ({ type: "img", src: p.src, caps: p.caps })),
+  ...FEATURE_STAGES.map((s) => ({ type: "img", src: s.src, caps: s.caps })),
 ];
 let lbIndex = 0;
 
@@ -88,14 +92,36 @@ GALLERY_VIDEOS.forEach((v, i) => {
 const galleryGrid = document.getElementById("galleryGrid");
 GALLERY_PHOTOS.forEach((p, i) => {
   const item = document.createElement("div");
-  item.className = "g-item";
+  item.className = "g-item" + (p.featured ? " featured" : "");
+  item.dataset.cat = p.cat;
   item.innerHTML = `
     ${p.badge ? `<span class="g-badge">${p.badge}</span>` : ""}
-    <div class="g-overlay"><span>${p.caps[lang] || p.caps.sq}</span></div>
+    <div class="g-caption">${p.caps[lang] || p.caps.sq}</div>
     <img src="${p.src}" alt="${p.caps.en}" loading="lazy" />
   `;
   item.addEventListener("click", () => openLightbox(GALLERY_VIDEOS.length + i));
   galleryGrid.appendChild(item);
+});
+
+// Featured-project stages open in lightbox too
+document.querySelectorAll("#gFeature .g-feature-stages figure").forEach((fig, i) => {
+  fig.addEventListener("click", () =>
+    openLightbox(GALLERY_VIDEOS.length + GALLERY_PHOTOS.length + i)
+  );
+});
+
+// Filters
+document.querySelectorAll("#galleryFilters button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("#galleryFilters button").forEach((b) =>
+      b.classList.toggle("active", b === btn)
+    );
+    const f = btn.dataset.filter;
+    document.querySelectorAll("#galleryGrid .g-item").forEach((el) => {
+      el.classList.toggle("hidden", f !== "all" && el.dataset.cat !== f);
+    });
+    document.getElementById("gFeature").classList.toggle("hidden", f !== "all" && f !== "de");
+  });
 });
 
 // Lightbox

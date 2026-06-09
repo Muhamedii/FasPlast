@@ -161,8 +161,53 @@
     <div class="container">
       <h2 class="section-title" data-i18n="gallery.title">Projektet Tona</h2>
       <p class="section-sub" data-i18n="gallery.subtitle">Disa nga punimet tona në Kosovë, Gjermani dhe Austri.</p>
+      <div class="gallery-filters" id="galleryFilters">
+        <button class="active" data-filter="all" data-i18n="gallery.filter.all">Të Gjitha</button>
+        <button data-filter="de" data-i18n="gallery.filter.de">🇩🇪 Gjermani &amp; Austri</button>
+        <button data-filter="xk" data-i18n="gallery.filter.xk">🇽🇰 Kosovë</button>
+        <button data-filter="exp" data-i18n="gallery.filter.exp">🚚 Eksport</button>
+      </div>
+
       <div class="gallery-videos" id="galleryVideos"></div>
+
+      <!-- Featured project: before → during → after -->
+      <div class="g-feature" id="gFeature">
+        <div class="g-feature-text">
+          <span class="g-feature-tag">🇩🇪 <span data-i18n="gallery.featured.loc">Gjermani</span></span>
+          <h3 data-i18n="gallery.featured.title">Renovim i plotë i një shtëpie</h3>
+          <p data-i18n="gallery.featured.desc">Zëvendësim komplet i dritareve dhe dyerve në një shtëpi ekzistuese: demontimi i të vjetrave dhe montimi i të rejave me izolim modern — gjithçka nga një dorë.</p>
+          <a href="#kontakti" class="btn btn-primary btn-sm" data-i18n="gallery.featured.btn">Dua rezultat të njëjtë</a>
+        </div>
+        <div class="g-feature-stages">
+          <figure>
+            <img src="img/gallery/house-de-before.png" alt="Before renovation" loading="lazy" />
+            <figcaption data-i18n="gallery.stage.before">Para</figcaption>
+          </figure>
+          <figure>
+            <img src="img/gallery/house-de-mid.png" alt="During renovation" loading="lazy" />
+            <figcaption data-i18n="gallery.stage.during">Gjatë punimeve</figcaption>
+          </figure>
+          <figure>
+            <img src="img/gallery/house-de-after.png" alt="After renovation" loading="lazy" />
+            <figcaption data-i18n="gallery.stage.after">Pas</figcaption>
+          </figure>
+        </div>
+      </div>
+
       <div class="gallery-grid" id="galleryGrid"></div>
+
+      <!-- Conversion CTA inside gallery -->
+      <div class="gallery-cta">
+        <div>
+          <h3 data-i18n="gallery.cta.title">Gati për të transformuar shtëpinë tuaj?</h3>
+          <p data-i18n="gallery.cta.sub">Matje dhe ofertë falas — pa asnjë obligim.</p>
+        </div>
+        <div class="gallery-cta-btns">
+          <a href="#kontakti" class="btn btn-primary" data-i18n="gallery.cta.btn">Kërko Ofertë Falas</a>
+          <a href="https://wa.me/38344885649?text=Pershendetje%20Fas%20Plast!" target="_blank" rel="noopener" class="btn btn-whatsapp">WhatsApp</a>
+        </div>
+      </div>
+
       <p class="gallery-note" data-i18n="gallery.note">Shihni më shumë projekte në Instagram dhe Facebook ⬇</p>
       <div class="gallery-social">
         <a href="https://www.instagram.com/fasplast05" target="_blank" rel="noopener" class="btn btn-outline">Instagram</a>
@@ -194,6 +239,37 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section class="section" id="si-punojme">
+    <div class="container">
+      <h2 class="section-title" data-i18n="process.title">Si Punojmë</h2>
+      <p class="section-sub" data-i18n="process.sub">Proces i qartë në 4 hapa — nga kontakti i parë deri te montimi.</p>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3 data-i18n="process.1.title">Kontakti & Matjet Falas</h3>
+          <p data-i18n="process.1.desc">Na shkruani në WhatsApp ose telefononi — vijmë për matje falas dhe ju këshillojmë në vend.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3 data-i18n="process.2.title">Oferta Brenda 24 Orëve</h3>
+          <p data-i18n="process.2.desc">Ofertë e detajuar me çmime transparente, direkt nga prodhuesi — pa asnjë obligim.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3 data-i18n="process.3.title">Prodhimi Me Porosi</h3>
+          <p data-i18n="process.3.desc">Produktet prodhohen saktësisht sipas masave tuaja, me profile dhe xham cilësor evropian.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3 data-i18n="process.4.title">Transporti & Montimi</h3>
+          <p data-i18n="process.4.desc">Ekipi ynë monton gjithçka profesionalisht — në Kosovë, Gjermani apo Austri.</p>
+        </div>
+      </div>
+      <p class="steps-note" data-i18n="process.note">✓ Garanci me shkrim në produkt dhe montim</p>
     </div>
   </section>
 
